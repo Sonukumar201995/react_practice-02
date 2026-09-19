@@ -1,25 +1,20 @@
-function App() {
+import { User } from "./User";
 
-  const handleForm = (event) => {
-    event.preventDefault();
+function App()
+{
 
-    const user = document.querySelector("#name").value;
-    const pass = document.querySelector("#pass").value;
-    console.log(user,pass);
-  };
+   const displayName=(name)=>{
+        alert(name);
+    }
 
-  return (
+  return(
     <>
-      <h1>uncontrolled component</h1>
-      <form onSubmit={handleForm}>
-        <input type="text" placeholder="enter name" id="name" />
-        <br />
-        <input type="password" placeholder="enter password" id="pass" />
-        <br />
-        <button>submit</button>
-      </form>
+    <h2>pass function in component</h2>
+    <User displayName={displayName} name="sonu kumar"/>
+    <User displayName={displayName} name="monu kumar"/>
+    <User displayName={displayName} name="arun kumar"/>
     </>
-  );
+  )
 }
 
 export default App;
