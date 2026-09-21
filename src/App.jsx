@@ -1,18 +1,19 @@
-import { User } from "./User";
+import { useRef } from "react"
+import User from './User'
 
 function App()
 {
+  let inputRef=useRef(null);
+  let update=()=>{
 
-   const displayName=(name)=>{
-        alert(name);
-    }
-
+    inputRef.current.value=1000;
+    inputRef.current.focus();
+  }
   return(
     <>
-    <h2>pass function in component</h2>
-    <User displayName={displayName} name="sonu kumar"/>
-    <User displayName={displayName} name="monu kumar"/>
-    <User displayName={displayName} name="arun kumar"/>
+    <h1>ForwardRef in react</h1>
+    <User ref={inputRef}/>
+    <button onClick={update}>update</button>
     </>
   )
 }

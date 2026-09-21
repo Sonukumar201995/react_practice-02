@@ -1,10 +1,8 @@
-export function User({displayName,name})
-{
-   
+const User=(props)=>{
     return(
-        <>
-            <button onClick={()=>displayName(name)}>display</button>
-        </>
+        <div>
+            <input type="text" ref={props.ref}/>
+        </div>
     )
 }
-
+export default User;
