@@ -1,33 +1,18 @@
-import { useFormStatus } from "react-dom"
+import { useTransition } from "react";
 
 function App()
 {
+  const [pending,startTransition]=useTransition();
 
-  let handleform=async()=>{
-    await new Promise(res=>setTimeout(res,2000))
-    console.log("submit")
-
-  }
-
-  function CustomerForm(){
-    const {pending}=useFormStatus();
-    console.log("pending")
-    return(
-      <>
-      <input type="text" placeholder="your name"/>
-      <br /><br />
-      <input type="password" placeholder="enter passwod"/>
-      <br /><br />
-      <button disabled={pending}>{pending ?'submitting...':'submit'}</button>
-      </>
-    )
+  const handleButton=()=>{
+    startTransition(async()=>{
+      await new Promise(res=>setTimeout(res,2000))
+    })
   }
   return(
     <>
-    <h2>useFormStatus Hook in react</h2>
-    <form action={handleform}>
-      <CustomerForm/>
-    </form>
+    <h2>useTransition hook in react</h2>
+    <button disabled={pending} onClick={handleButton}>click</button>
     </>
   )
 }
