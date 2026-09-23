@@ -1,14 +1,10 @@
-import { useId } from "react";
+import React from "react";
 
 function App() {
-  const id = useId();
-
   return (
-    <>
-      <label htmlFor={id}>Username</label>
-      <input id={id} type="text" />
-    </>
+    <React.Fragment>
+      <h1>Hello</h1>
+      <p>Welcome</p>
+    </React.Fragment>
   );
 }
-
-export default App;
