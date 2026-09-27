@@ -1,25 +1,22 @@
-import {Routes,Route,Link} from 'react-router'
-import {Home} from './Home'
-import { About } from './About';
-import { Login } from './Login';
+import{Routes,Route} from 'react-router'
 
-function App()
+import { About } from "./About";
+import { Home } from "./Home";
+import { Login } from "./Login";
+import { NavBar } from './NavBar';
+
+
+ function App()
 {
   return(
     <>
-    <h2>Basic page with react-router</h2>
-
-     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-      <Link to="/login">Login</Link>
-      </nav> 
-
-      <Routes>
-        <Route path='/' element={<Home/>}/> 
-        <Route path='/about' element={<About/>}/> 
-        <Route path='/login' element={<Login/>}/> 
-      </Routes>
+    <h2>header with react-router</h2>
+    <NavBar/>
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path='/about' element={<About/>}/>
+      <Route path='/login' element={<Login/>}/>
+    </Routes>
     </>
   )
 }
