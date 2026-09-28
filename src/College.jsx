@@ -1,11 +1,15 @@
-import Class from "./Class";
+import { Link ,NavLink, Outlet} from "react-router";
 
 function College()
 {
     return(
-        <div style={{background:'orange' ,padding:10}}>
-        <h2>college component</h2>
-        <Class/>
+        <div style={{textAlign:'center'}}>
+        <h2>college page</h2>
+
+        <NavLink to="student">Student</NavLink>
+        <NavLink to="department">Department</NavLink>
+        <NavLink to="studentdetails">Student Details</NavLink>
+        <Outlet/>
         </div>
     )
 }
