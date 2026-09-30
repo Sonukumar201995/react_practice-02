@@ -9,6 +9,8 @@ import Student from './Student';
 import { Department } from './Deparment';
 import { StudentDetails } from './StudentDetail';
 import { PageNotFound } from './PageNotFound';
+import UserList from './UserList';
+import { UserDetails } from './UserDetails';
 
 
  function App()
@@ -21,11 +23,13 @@ import { PageNotFound } from './PageNotFound';
       <Route path="/" element={<Home/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='/login' element={<Login/>}/>
+      <Route path="users" element={<UserList/>}/>
+      <Route path="users/:id" element={<UserDetails/>}/>
       <Route path="/college" element={<College />}>
       <Route path="student" element={<Student />} />
       <Route path="department" element={<Department />} />
       <Route path="studentdetails" element={<StudentDetails />} />
-</Route>
+      </Route>
       <Route path='/*' element={<PageNotFound/>}/>
     </Routes>
     </>

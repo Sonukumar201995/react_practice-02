@@ -27,6 +27,10 @@ export function NavBar() {
         <li>
           <Link to="/college">College</Link>
         </li>
+
+        <li>
+          <Link to="users">User</Link>
+        </li>
       </ul>
 
     </div>
