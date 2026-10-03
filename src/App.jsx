@@ -1,25 +1,33 @@
 import { useEffect, useState } from "react";
 
 function App() {
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     userData();
   }, []);
-  async function userData() {
-    const response = await fetch("https://dummyjson.com/users");
+
+  let userData = async () => {
+    const url = "http://localhost:3000/users";
+
+    const response = await fetch(url);
     const data = await response.json();
-    setUsers(data.users);
-  }
+
+    setUsers(data);
+
+    console.log(data);
+  };
+
   return (
     <>
-      <h2>API,Get method</h2>
-      {users.map((user,index) => (
-        <p key={index}>{user.firstName}
-        {user.lastName}  
-        {user.age}  
-        </p>
-      ))}
+      <h1>Integrate json server api and loader</h1>
+
+      {
+        users.map((user, index) => (
+          <h3 key={index}>{user.name}</h3>
+        ))
+      }
     </>
   );
 }
