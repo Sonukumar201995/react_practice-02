@@ -1,68 +1,48 @@
-import { useState } from "react";
+import { useActionState } from "react"
 
-function App() {
-  const [name, setName] = useState("");
-  const [nameErr, setNameErr] = useState("");
-  const [Password, setPassword] = useState("");
-  const [PasswordErr, setPasswordErr] = useState("");
+function App()
+{
 
-  let handleName = (event) => {
-    console.log(event.target.value);
+  let handleLogin=(preData,formData)=>{
+    let name=formData.get("name")
+    let password=formData.get("password")
 
-    if (event.target.value.length > 5) {
-      setNameErr(
-        "Please enter valid username. Only 5 characters allowed"
-      );
-    } else {
-      setNameErr("");
+    let regex=/^[A-Z a-z 0-9]+$/i;
+    if(!name ||name.length>5)
+    {
+        return {error :'only 5 character allowed'}
+    }else if(!regex.test(password))
+    {
+        return {error: 'only alphabed and numberic value allowed'}
+    }else
+    {
+      return {messaage: "login done"}
     }
-  };
 
-  let handlePassword = (event) => {
-    console.log(event.target.value);
-
-    const passwordRegex = /^[A-Za-z0-9]+$/;
-
-    if (!passwordRegex.test(event.target.value)) {
-      setPasswordErr(
-        "Please enter valid password. Only alphabets and numbers allowed"
-      );
-    } else {
-      setPasswordErr("");
-    }
-  };
-
-  return (
+  }
+  const [data,action,pending]=useActionState(handleLogin)
+  console.log(data);
+  return(
     <>
-      <h1>Validation in React</h1>
+    <h1>validation with useActionState in React</h1>
+    {
+      data ?.messaage && <span>{data ?.messaage}</span>
+    }
+    {
+      data ?.error && <span>{data ?.error}</span>
+    }
+    <form action={action}>
 
-      <input
-        type="text"
-        onChange={handleName}
-        placeholder="Enter Name"
-      />
+      <input type="text" name="name" placeholder="enter name"/>
+      <br /><br />
 
-      <span>{nameErr && nameErr}</span>
+      <input type="password" name="password" placeholder="enter password"/>
+      <br /><br />
 
-      <br />
-      <br />
-
-      <input
-        type="password"
-        onChange={handlePassword}
-        placeholder="Enter Password"
-      />
-
-      <span>{PasswordErr && PasswordErr}</span>
-
-      <br />
-      <br />
-
-      <button disabled={nameErr || PasswordErr}>
-        Login
-      </button>
+      <button disabled={pending}>{pending ? "Logging in..." : "Login"}</button>
+    </form>
     </>
-  );
+  )
 }
 
 export default App;
