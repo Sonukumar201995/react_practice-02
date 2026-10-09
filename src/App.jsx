@@ -1,48 +1,52 @@
-import { useActionState } from "react"
+import { useReducer } from "react";
 
+   const emptyData={
+        name:'',
+        password:'',
+        email:'',
+        city:'',
+        address:''
+    }
+
+
+    const reducer=(data,action)=>{
+        return {...data,[action.type]:action.val}
+    }
 function App()
 {
 
-  let handleLogin=(preData,formData)=>{
-    let name=formData.get("name")
-    let password=formData.get("password")
+    const[state,dispatch]=useReducer(reducer,emptyData)
+        // console.log(state)
+    return(
+        <>
+        <h1>useReduce Hooks in React</h1>
+        <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'name'})} placeholder="enter name"/>
+        <br /><br />
 
-    let regex=/^[A-Z a-z 0-9]+$/i;
-    if(!name ||name.length>5)
-    {
-        return {error :'only 5 character allowed'}
-    }else if(!regex.test(password))
-    {
-        return {error: 'only alphabed and numberic value allowed'}
-    }else
-    {
-      return {messaage: "login done"}
-    }
+        <input type="password" onChange={(event)=>dispatch({val:event.target.value,type:'password'})} placeholder="enter password"/>
+        <br /><br />
 
-  }
-  const [data,action,pending]=useActionState(handleLogin)
-  console.log(data);
-  return(
-    <>
-    <h1>validation with useActionState in React</h1>
-    {
-      data ?.messaage && <span>{data ?.messaage}</span>
-    }
-    {
-      data ?.error && <span>{data ?.error}</span>
-    }
-    <form action={action}>
+        <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'email'})} placeholder="enter email"/>
+        <br /><br />
 
-      <input type="text" name="name" placeholder="enter name"/>
-      <br /><br />
+        <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'city'})} placeholder="enter city"/>
+        <br /><br />
 
-      <input type="password" name="password" placeholder="enter password"/>
-      <br /><br />
+        <input type="text" onChange={(event)=>dispatch({val:event.target.value,type:'address'})} placeholder="enter address"/>
+        <br /><br />
 
-      <button disabled={pending}>{pending ? "Logging in..." : "Login"}</button>
-    </form>
-    </>
-  )
+         <ul>
+            <li>Name :{state.name}</li>
+            <li>password :{state.password}</li>
+            <li>email :{state.email}</li>
+            <li>city :{state.city}</li>
+            <li>address :{state.address}</li>
+        </ul>
+
+        <button onClick={()=>console.log(state)}>Add Details</button>
+
+       
+        </>
+    )
 }
-
 export default App;
